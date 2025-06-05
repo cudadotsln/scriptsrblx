@@ -9,13 +9,12 @@ Players.LocalPlayer.Chatted:Connect(function(msg)
 end)
 
 Players.PlayerRemoving:Connect(function(player)
-    function chatMessage(str)
+    function chatMessage(msg)
         if canDoFakeKick then
-            str = tostring(str)
             if game.TextChatService.ChatVersion ~= Enum.ChatVersion.LegacyChatService then
-                game.TextChatService.TextChannels.RBXGeneral:SendAsync(str)
+                game.TextChatService.TextChannels.RBXGeneral:SendAsync(tostring(msg))
             else
-                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(str, "All")
+                game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(tostring(msg), "All")
             end
         end
     end
